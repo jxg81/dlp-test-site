@@ -4,8 +4,9 @@ from werkzeug.utils import secure_filename
 app = Flask(__name__)
 app.config['MAX_CONTENT_LENGTH'] = 50 * 1000 * 1000
 
-@app.route('/', methods=['GET'])
-def homepage():
+@app.route('/', defaults={'path': ''}, methods=['GET'])
+@app.route('/<path:path>')
+def homepage(path):
     return render_template('index.html', home=True)
 
 @app.route('/', methods=['POST'])
