@@ -1,0 +1,89 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="{{url_for('static', filename='favicon.ico')}}"/>
+
+    <title>Share Your Data With The World</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/cover/">
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+
+    <!-- Custom styles for this template -->
+    <link href="{{url_for('static', filename='cover.css')}}" rel="stylesheet">
+  </head>
+
+  <body class="text-center">
+
+    <div class="cover-container d-flex h-100 p-3 mx-auto flex-column" style="width: 800px">
+      <header class="masthead mb-auto">
+        <div class="inner">
+          <h3 class="masthead-brand">Data Leaker</h3>
+          <nav class="nav nav-masthead justify-content-center">
+            {% if home is defined %}
+            <a class="nav-link active" href="/">Home</a>
+            <a class="nav-link" href="about">About</a>
+            <a class="nav-link" href="samples">Sample Data</a>
+            {% elif about is defined %}
+            <a class="nav-link" href="/">Home</a>
+            <a class="nav-link active" href="about">About</a>
+            <a class="nav-link" href="samples">Sample Data</a>
+            {% elif samples is defined %}
+            <a class="nav-link" href="/">Home</a>
+            <a class="nav-link" href="about">About</a>
+            <a class="nav-link active" href="samples">Sample Data</a>
+            {% endif %}
+          </nav>
+        </div>
+      </header>
+
+      {% if home is defined %}
+      <main role="main" class="inner cover">
+        <h1 class="cover-heading">Share your content.</h1>
+        <p class="lead">Enter text in the field below or select a file to upload and hit submit.</p>
+        <p class="lead">
+        <form method="POST" action="" enctype="multipart/form-data">
+            <textarea class="form-control" id="text-input" name="text-input" rows="3" placeholder="Enter text here"></textarea></br>
+            <input class="form-control" type="file" id="file" name="file"></br>
+            <input type="submit" value="Submit" class="btn btn-lg btn-secondary">
+        </p>
+      </main>
+      {% endif %}
+
+      {% if about is defined %}
+      <main role="main" class="inner cover">
+        <h1 class="cover-heading">About.</h1>
+        <p class="lead">
+            This simple demo site was created to demonstrate data loss prevention features of Zscaler Internet Access. </br></br>
+            No data is retained on the server when utilising the text and file upload functions on this site. However, please do not submit any sensitive or personally identifiable information. </br></br>
+            Sample data for testing and validation can be found <a href="/samples">here</a> </br></br>
+            If you have any questions please contact <a href="mailto:jgreensmith@zscaler.com">Julian Greensmith</a> </br>
+        </p>
+        <p class="mastfoot mt-auto">
+            Created using Cover template for <a href="https://getbootstrap.com/">Bootstrap</a> by <a href="https://twitter.com/mdo">@mdo</a>
+        </p>
+      </main>
+      {% endif %}
+
+      <footer class="mastfoot mt-auto">
+        <div class="inner">
+          <p>Created by <a href="mailto:jgreensmith@zscaler.com">Julian Greensmith</a>. Source available at <a href="https://github.com/jxg81">Github</a></p>
+        </div>
+      </footer>
+    </div>
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+  </body>
+</html>
