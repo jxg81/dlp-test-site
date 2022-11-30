@@ -10,7 +10,7 @@ def homepage(path):
     return render_template('index.html', home=True)
 
 @app.route('/', methods=['POST'])
-def post_content():
+def homepage_post_content():
     received_file = request.files['file']
     filename = secure_filename(received_file.filename)
     received_text = str(request.form['text-input'])
@@ -23,3 +23,12 @@ def about_page():
 @app.route('/samples', methods=['GET'])
 def samples_page():
     return render_template('index.html', samples=True)
+
+@app.route('/samples', methods=['POST'])
+def samples_post_content():
+    record_type = str(request.form['record_type'])
+    file_format = str(request.form['file_format'])
+    record_qty = int(request.form['record_qty'])
+    print(record_type, record_qty, file_format)
+    return render_template('index.html', samples=True)
+
