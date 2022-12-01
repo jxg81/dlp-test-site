@@ -1,5 +1,6 @@
-from flask import Flask, request, redirect, render_template, session, url_for, Response
+from flask import Flask, request, redirect, render_template, session, url_for, Response, send_file
 from werkzeug.utils import secure_filename
+from sample_gen import data_generator
 
 app = Flask(__name__)
 app.config['MAX_CONTENT_LENGTH'] = 50 * 1000 * 1000
@@ -29,6 +30,17 @@ def samples_post_content():
     record_type = str(request.form['record_type'])
     file_format = str(request.form['file_format'])
     record_qty = int(request.form['record_qty'])
-    print(record_type, record_qty, file_format)
-    return render_template('index.html', samples=True)
-
+    match file_format:
+        case 'csv':
+            mimetype='text/csv'
+        case 'pdf':
+            mimetype='application/pdf'
+        case 'json':
+            mimetype='application/json'
+        case 'txt':
+            mimetype='text/plain'
+    data = data_generator(record_type, file_format, record_qty)
+    return send_file(data,
+                     as_attachment=True,
+                     download_name=f'sample_data.{file_format.lower()}',
+                     mimetype=mimetype)
