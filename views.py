@@ -30,15 +30,14 @@ def samples_post_content():
     record_type = str(request.form['record_type'])
     file_format = str(request.form['file_format'])
     record_qty = int(request.form['record_qty'])
-    match file_format:
-        case 'csv':
-            mimetype='text/csv'
-        case 'pdf':
-            mimetype='application/pdf'
-        case 'json':
-            mimetype='application/json'
-        case 'txt':
-            mimetype='text/plain'
+    if file_format == 'csv':
+        mimetype='text/csv'
+    elif file_format == 'pdf':
+        mimetype='application/pdf'
+    elif file_format == 'json':
+        mimetype='application/json'
+    elif file_format == 'txt':
+        mimetype='text/plain'
     data = data_generator(record_type, file_format, record_qty)
     return send_file(data,
                      as_attachment=True,

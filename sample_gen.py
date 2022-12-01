@@ -79,24 +79,22 @@ def data_generator(data_type: str, output_format: str, qty: int):
         bytes_file.write(string_file.getvalue().encode())
         return bytes_file
     
-    match data_type:
-        case 'cc':
-            content = credit_card_gen(qty)
-        case 'pii':
+    if data_type == 'cc':
+        content = credit_card_gen(qty)
+    elif data_type == 'pii':
             content = pii_gen(qty)
-        case 'bank':
+    elif data_type == 'bank':
             content = bank_gen(qty)
             
-    match output_format:
-        case 'csv':
+    if output_format == 'csv':
             string_file = csv_formatter(content)
             bytes_file = string_to_bytes(string_file)
-        case 'pdf':
+    if output_format == 'pdf':
             bytes_file = pdf_formatter(content)
-        case 'json':
+    if output_format == 'json':
             string_file = json_formatter(content)
             bytes_file = string_to_bytes(string_file)
-        case 'txt':
+    if output_format == 'txt':
             string_file = text_formatter(content)
             bytes_file = string_to_bytes(string_file)
            
