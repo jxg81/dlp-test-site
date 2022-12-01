@@ -80,8 +80,51 @@
       <main role="main" class="inner cover">
         <h1 class="cover-heading">Sample Data.</h1>
         <p class="lead">
-            Coming Soon.
+            Generate random data by selecting data type, format and quantity from the drop downs below.
         </p>
+        <form method="POST" action="">
+        <div class="form-group">
+          <label for="record_type">Data Type</label>
+          <select class="form-control" id="record_type" name="record_type">
+            <option value="cc">Credit Card Details</option>
+            <option value="pii">PII (Name, Address, Email, etc.)</option>
+            <option value="bank">Banking</option>
+          </select>
+        </br>
+          <label for="file_format">File Format</label>
+          <select class="form-control" id="file_format", name="file_format">
+            <option value="csv">CSV</option>
+            <option value="txt">TXT</option>
+            <option value="pdf">PDF</option>
+            <option value="json">JSON</option>
+          </select>
+        </br>
+          <div style="position:relative; margin:auto; width:100%">
+            <label for="record_qty" class="form-label">Number of Records to Create</label>
+            <input class="form-range" type="range" id="record_qty" name="record_qty" value='10' max="100" min="1" style="width:100%"></br></br></br>
+            <span style="position:absolute; color:white; min-width:100px;">
+              <span id="record_qty_value"></span>
+            </span>
+          </div>
+          <input type="submit" value="Submit" class="btn btn-lg btn-secondary">
+        </form>
+          <script type="text/javascript" charset="utf-8">
+            var record_qty = document.querySelector('#record_qty');
+            var record_qty_value = document.querySelector('#record_qty_value');
+            var myUnits = 'Records';
+            var off = record_qty.offsetWidth / (parseInt(record_qty.max) - parseInt(record_qty.min));
+            var px =  ((record_qty.valueAsNumber - parseInt(record_qty.min)) * off) - (record_qty_value.offsetParent.offsetWidth / 2);
+            
+              record_qty_value.parentElement.style.left = px + 'px';
+              record_qty_value.parentElement.style.bottom = record_qty.offsetHeight + 'px';
+              record_qty_value.innerHTML = record_qty.value + ' ' + myUnits;
+            
+              record_qty.oninput =function(){
+                let px = ((record_qty.valueAsNumber - parseInt(record_qty.min)) * off) - (record_qty_value.offsetWidth / 2);
+                record_qty_value.innerHTML = record_qty.value + ' ' + myUnits;
+                record_qty_value.parentElement.style.left = px + 'px';
+              };
+              </script>
       </main>
       {% endif %}
 
