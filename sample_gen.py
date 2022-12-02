@@ -25,8 +25,8 @@ def pii_gen(qty: int) -> list:
     for _ in range(qty):
         profile = fake.profile()
         del profile['current_location']
+        del profile['website']
         profile['birthdate'] = str(profile['birthdate'])
-        profile['website'] = str(profile['website'])
         profile['address'] = profile['address'].replace("\n", " ")
         profile['residence'] = profile['residence'].replace("\n", " ")
         output.append(profile)
@@ -38,6 +38,16 @@ def bank_gen(qty: int) -> list:
         iban=fake.iban()
         company=fake.company()
         output.append({'company': company, 'iban': iban})
+    return output
+
+def cc_and_pii(qty: int) -> list:
+    cc_data = credit_card_gen(qty)
+    pii_data = pii_gen(qty)
+    count = qty -1
+    output: list = []
+    while count > 0:
+        output.append(cc_data[count] | pii_data[count])
+        count -= 1
     return output
 
 def csv_formatter(content: list[dict]):
@@ -83,6 +93,8 @@ def data_generator(data_type: str, output_format: str, qty: int):
         content = credit_card_gen(qty)
     elif data_type == 'pii':
             content = pii_gen(qty)
+    if data_type == 'cc+pii':
+        content = cc_and_pii(qty)
     elif data_type == 'bank':
             content = bank_gen(qty)
             
