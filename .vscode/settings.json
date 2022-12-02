@@ -6,5 +6,6 @@
         "pdfgen",
         "reportlab",
         "werkzeug"
-    ]
+    ],
+    "python.terminal.activateEnvironment": true
 }
